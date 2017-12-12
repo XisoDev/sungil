@@ -1,0 +1,125 @@
+<load target="./grid.css" />
+<load target="common.css"/>
+<load target="/common/xeicon/xeicon.min.css" />
+<load target="main_layout.css" cond="$mid == 'home'"/>
+<load target="main.js" cond="$mid == 'home'"/>
+<load target="sub_layout.css" cond="$mid != 'home'"/>
+
+<load target="./vegas/vegas.min.css" />
+<load target="./vegas/vegas.js" />
+
+<load target="./scrollforever.js" />
+<load target="./parallax.min.js" />
+<load target="./common.js" />
+<div class="header">
+	<div class="max-width">
+	<h1 id="logobox">
+		<a href="{getUrl('')}"><img alt="SUNG IL HI-TECH" src="./images/logo_color.png" height="35" /></a>
+	</h1>
+	<div class="gnb">
+		<ul>
+			<li loop="$global_menu->list=>$key1,$val1" class="active {@$selected_menu = $val1}"|cond="$val1['selected']"><a href="{$val1['href']}" target="_blank"|cond="$val1['open_window']=='Y'">{$val1['link']}</a>
+				<ul cond="$val1['list']" class="submenu">
+					<block loop="$val1['list']=>$key2,$val2">
+						<!--@if($val2['href'] == "../../".$document_srl)-->
+						{@ $val2['selected'] = true}
+						<!--@end-->
+						<li class="active"|cond="$val2['selected']">
+							<a href="{$val2['href']}" target="_blank"|cond="$val2['open_window']=='Y'">{$val2['link']}</a>
+						</li>
+					</block>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	</div>
+</div>
+<!--@if(!$selected_menu['list'] && $module_info->module == 'page')-->
+<div class="subpage">
+{$content}
+</div>
+<!--@else-->
+<div class="subpage">
+	<div class="visual" style="background-image:url('./layouts/sungil/images/sub_visual.jpg')">
+		<div class="max-width">
+		<h2>SUNG IL HI-TECH</h2>
+		<h3>Reliable Global Partner in Gear Reducer with Endless Efforts</h3>
+		</div>
+	</div>
+	<div class="max-width">
+		<!--@if(!$selected_menu['list'])-->
+		{$content}
+		<!--@else-->
+			<div class="si_content">
+				<aside>
+					<ul class="submenu">
+						<block loop="$selected_menu['list']=>$key2,$val2">
+							<!--@if($val2['href'] == "../../".$document_srl)-->
+							{@ $val2['selected'] = true}
+							<!--@end-->
+							<li class="active"|cond="$val2['selected']">
+								<a href="{$val2['href']}" target="_blank"|cond="$val2['open_window']=='Y'">{$val2['link']}</a>
+							</li>
+						</block>
+					</ul>
+				</aside>
+				{$content}
+			</div>
+			<div class="clearfix"></div>
+		<!--@end-->
+	</div>
+</div>
+<!--@end-->
+<div style="clear:both;"></div>
+<footer>
+	<div class="max-width">
+		<div id="map" style="height:300px;"></div>
+		<script>
+            function initMap() {
+                var office = {lat: 35.099947, lng: 128.877603};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: office
+                });
+                var marker = new google.maps.Marker({
+                    position: office,
+                    map: map
+                });
+            }
+		</script>
+		<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW0I-k247zzQpuRCnmmwQ9ipkrTM01R4Q&callback=initMap">
+		</script>
+		<br />
+		<br />
+	</div>
+	<div class="footer_background">
+		<div class="row max-width">
+			<div class="col col-sm-4">
+				<i class="xi-map-marker"></i>
+				<p>
+					15, Hwajeonsandan 5-ro, Gangseo-gu<br />Busan, Republic of Korea
+				</p>
+			</div>
+			<div class="col col-sm-4">
+				<i class="xi-fax"></i>
+				<p>
+					TEL. +8251) 263-0008 <br />
+					FAX. +8251) 263-3040
+				</p>
+			</div>
+			<div class="col col-sm-4">
+				<i class="xi-social-email"></i>
+				<p>
+					info@isungil.co.kr/pro@isungil.co.kr / <br />
+					valve@isungil.co.kr / sales@isungil.co.kr
+				</p>
+			</div>
+		</div>
+		<div class="text-center">
+			<img src="./images/white_logo.png" height="20"/>
+		</div>
+		<br />
+		<br />
+	</div>
+</footer>
